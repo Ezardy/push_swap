@@ -6,33 +6,27 @@
 /*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/02 14:16:03 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/05 20:27:45 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
-	int	*array;
-	int	i;
-	int	num_count;
+	t_dllist	*a;
+	t_dllist	*b;
 
-	num_count = read_numbers(argv + 1, argc - 1, &array);
-	if (num_count == -1)
-		ft_putstr_fd("Error", 1);
-	else
+	a = read_numbers(argv + 1, argc - 1);
+	if (a)
 	{
-		if (num_count)
-			ft_putnbr_fd(array[0], 1);
-		i = 1;
-		while (i < num_count)
+		b = create_dllist();
+		if (b)
 		{
-			ft_putchar_fd(' ', 1);
-			ft_putnbr_fd(array[i++], 1);
+			clear_dllist(b);
+			free(b);
 		}
+		clear_dllist(a);
+		free(a);
 	}
-	ft_putchar_fd('\n', 1);
-	free(array);
 }

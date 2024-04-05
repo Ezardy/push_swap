@@ -6,70 +6,64 @@
 /*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:28:37 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/02 14:14:10 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/05 21:12:46 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "common.h"
 #include <stdlib.h>
 
-static int	parse_strs(char **strs, int *num_arr, int *place);
+static int	node_matches(int val, int oval);
+static int	parse_strs(char **strs, t_dllist *l);
 int			ft_atoi_safe(const char *str, int *num);
 
-int	read_numbers(char **params, int pcount, int **num_arr)
+t_dllist	*read_numbers(char **params, int pcount)
 {
-	int		count;
-	char	**nums;
-	int		place;
-	int		num_in_str;
+	char		**nums;
+	int			error;
+	t_dllist	*dllist;
 
-	count = 0;
-	*num_arr = NULL;
-	place = 0;
-	if (pcount)
+	dllist = create_dllist();
+	if (dllist && pcount)
 	{
-		*num_arr = (int *)malloc(sizeof(int) * pcount);
-		count = - (num_arr == NULL);
-		while (count != -1 && pcount--)
+		error = 0;
+		while (!error && pcount--)
 		{
 			nums = ft_split(*params++, ' ');
-			num_in_str = parse_strs(nums, *num_arr, &place);
-			count = count * (num_in_str != -1) + num_in_str;
+			error = nums == 0 || parse_strs(nums, dllist);
+		}
+		if (error)
+		{
+			clear_dllist(dllist);
+			free(dllist);
+			dllist = NULL;
 		}
 	}
-	if (count == -1)
-	{
-		free(*num_arr);
-		*num_arr = NULL;
-	}
-	return (count);
+	return (dllist);
 }
 
-static int	parse_strs(char **strs, int *num_arr, int *place)
+static int	parse_strs(char **strs, t_dllist *l)
 {
 	int	i;
-	int	j;
-	int	count;
+	int	error;
+	int	tmp;
 
-	count = 0;
 	i = 0;
-	while (count != -1 && strs[i])
+	error = 0;
+	while (!error && strs[i])
 	{
-		count = ft_atoi_safe(strs[i++], num_arr + *place) * -(count + 2)
-			+ count + 1;
-		if (count != -1)
-		{
-			j = 0;
-			while (j < *place && num_arr[j] != num_arr[*place])
-				j++;
-			count = (j == *place) * (count + 1) - 1;
-		}
-		(*place)++;
+		error = ft_atoi_safe(strs[i++], &tmp) || dllist_find(l, node_matches,
+				tmp) != NULL || dllist_push_back(l, tmp);
 	}
 	i = 0;
 	while (strs[i])
 		free(strs[i++]);
 	free(strs[i]);
 	free(strs);
-	return (count);
+	return (error);
+}
+
+static int	node_matches(int val, int oval)
+{
+	return (val == oval);
 }

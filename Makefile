@@ -7,6 +7,7 @@ HEADERS_DIR=header
 IFLAGS=-I$(HEADERS_DIR) -I.
 PUSH_SWAP_HEADER=$(HEADERS_DIR)/push_swap.h
 CHECKER_HEADER=$(HEADERS_DIR)/checker.h
+COMMON_HEADER=$(HEADERS_DIR)/common.h
 PUSH_SWAP_DIR=push_swap
 CHECKER_DIR=checker
 PUSH_SWAP_PATH=$(SOURCES_DIR)/$(PUSH_SWAP_DIR)
@@ -15,7 +16,7 @@ PUSH_SWAP_BUILD_PATH=$(BUILD_DIR)/$(PUSH_SWAP_DIR)
 CHECKER_BUILD_PATH=$(BUILD_DIR)/$(CHECKER_DIR)
 PUSH_SWAP_MODULES=main
 CHECKER_MODULES=main
-COMMON_MODULES=numbers_reader ft_atoi_safe
+COMMON_MODULES=numbers_reader ft_atoi_safe push swap rotate_up rotate_down dllist dllist_is_sorted
 
 PUSH_SWAP_OBJ=$(addprefix $(PUSH_SWAP_BUILD_PATH)/, $(addsuffix .o, $(PUSH_SWAP_MODULES)))
 CHECKER_OBJ=$(addprefix $(CHECKER_BUILD_PATH)/, $(addsuffix .o, $(CHECKER_MODULES)))
@@ -31,7 +32,7 @@ libft/libft.a:
 	make -C libft all
 
 push_swap: $(PUSH_SWAP_BUILD_PATH) libft/libft.a $(PUSH_SWAP_OBJ) $(COMMON_OBJ) $(PUSH_SWAP_HEADER) Makefile
-	cc $(CFLAGS) $(LFLAGS) -o $@ $(PUSH_SWAP_OBJ) $(COMMON_OBJ) -lft
+	cc $(CFLAGS) $(LFLAGS) -DPRINT_STACK_ACTIONS=1 -o $@ $(PUSH_SWAP_OBJ) $(COMMON_OBJ) -lft
 
 checker: $(CHECKER_BUILD_PATH) libft $(CHECKER_OBJ) $(COMMON_OBJ) $(CHECKER_HEADER) Makefile
 	cc $(CFLAGS) $(LFLAGS) -o $@ $(CHECKER_OBJ) $(COMMON_OBJ) -lft
@@ -51,7 +52,7 @@ $(PUSH_SWAP_BUILD_PATH)/%.o: $(PUSH_SWAP_PATH)/%.c $(PUSH_SWAP_HEADER) Makefile
 $(CHECKER_BUILD_PATH)/%.o: $(CHECKER_PATH)/%.c $(CHECKER_HEADER) Makefile
 	cc $(CFLAGS) $(IFLAGS) -o $@ -c $<
 
-$(BUILD_DIR)/%.o: $(SOURCES_DIR)/%.c Makefile
+$(BUILD_DIR)/%.o: $(SOURCES_DIR)/%.c $(COMMON_HEADER) Makefile
 	cc $(CFLAGS) $(IFLAGS) -o $@ -c $<
 
 clean:

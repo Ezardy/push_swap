@@ -6,12 +6,14 @@
 /*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:19:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/03/25 19:22:14 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/05 18:03:20 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# include "libft/libft.h"
+# include "common.h"
+# include <stdlib.h>
+
 #endif
