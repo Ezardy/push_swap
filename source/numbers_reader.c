@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   numbers_reader.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:28:37 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 21:12:46 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/10 17:21:36 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include <stdlib.h>
 
-static int	node_matches(int val, int oval);
 static int	parse_strs(char **strs, t_dllist *l);
 int			ft_atoi_safe(const char *str, int *num);
 
@@ -23,7 +22,7 @@ t_dllist	*read_numbers(char **params, int pcount)
 	int			error;
 	t_dllist	*dllist;
 
-	dllist = create_dllist();
+	dllist = create_dllist('a');
 	if (dllist && pcount)
 	{
 		error = 0;
@@ -44,16 +43,21 @@ t_dllist	*read_numbers(char **params, int pcount)
 
 static int	parse_strs(char **strs, t_dllist *l)
 {
-	int	i;
-	int	error;
-	int	tmp;
+	int		i;
+	int		error;
+	int		tmp;
+	t_onode	mnode;
 
 	i = 0;
 	error = 0;
 	while (!error && strs[i])
 	{
-		error = ft_atoi_safe(strs[i++], &tmp) || dllist_find(l, node_matches,
-				tmp) != NULL || dllist_push_back(l, tmp);
+		error = ft_atoi_safe(strs[i++], &tmp);
+		if (!error)
+		{
+			dllist_find(l->top, l->size, tmp, &mnode);
+			error = mnode.node == NULL || dllist_push_back(l, tmp);
+		}
 	}
 	i = 0;
 	while (strs[i])
@@ -61,9 +65,4 @@ static int	parse_strs(char **strs, t_dllist *l)
 	free(strs[i]);
 	free(strs);
 	return (error);
-}
-
-static int	node_matches(int val, int oval)
-{
-	return (val == oval);
 }

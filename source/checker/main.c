@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:21:20 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 20:17:58 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/10 15:25:37 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	a = read_numbers(argv + 1, argc - 1);
 	if (a)
 	{
-		b = create_dllist();
+		b = create_dllist('b');
 		if (b)
 		{
 			error = exec_instr(a, b);
@@ -75,7 +75,7 @@ static int	exec_push_swap_instr(t_dllist *a, t_dllist *b, char *instr)
 
 	executed = 1;
 	if (!ft_strncmp(instr, "pa\n", 3))
-		pa(a, b);
+		p_(a, b);
 	else if (!ft_strncmp(instr, "pb\n", 3))
 		pb(a, b);
 	else if (!ft_strncmp(instr, "sa\n", 3))
@@ -101,7 +101,7 @@ static int	exec_rotate_instr(t_dllist *a, t_dllist *b, char *instr)
 	else if (!ft_strncmp(instr, "rr\n", 3))
 		rr(a, b);
 	else if (!ft_strncmp(instr, "rra\n", 4))
-		rra(a);
+		rr_(a);
 	else if (!ft_strncmp(instr, "rrb\n", 4))
 		rrb(b);
 	else if (!ft_strncmp(instr, "rrr\n", 4))

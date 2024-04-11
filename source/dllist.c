@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dllist.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:11:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 21:08:46 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/10 17:03:10 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ void	clear_dllist(t_dllist *l)
 	}
 }
 
-t_dllist	*create_dllist(void)
+t_dllist	*create_dllist(char id)
 {
 	t_dllist	*l;
 
 	l = (t_dllist *)malloc(sizeof(t_dllist));
 	if (l)
 	{
+		l->id = id;
 		l->size = 0;
 		l->top = NULL;
 	}
@@ -77,17 +78,14 @@ t_dllist	*create_dllist(void)
 
 int	dll_is_sorted(t_dllist *l)
 {
-	t_dllist_node	*cur;
-	size_t			i;
-	int				sorted;
+	t_bypass	bypass;
+	t_onode		onode;
 
-	sorted = 1;
-	if (l->size > 1)
-	{
-		i = 1;
-		cur = l->top;
-		while (sorted && i++ < l->size)
-			sorted = cur->val < cur->prev->val;
-	}
-	return (sorted);
+	bypass.depth = l->size - 1;
+	bypass.init = first_match_init;
+	bypass.cont_cond = matched_cont_cond;
+	bypass.cond = gt_next_cond;
+	bypass.next = down_next;
+	dllist_bypass(l->top, &bypass, &onode);
+	return (onode.node == NULL);
 }

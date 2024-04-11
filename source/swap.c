@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:18:36 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/03 17:54:17 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/06 20:05:31 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 static int	swap(t_dllist *a);
 
-void	sa(t_dllist *a)
+void	s_(t_dllist *l)
 {
-	if (swap(a) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("sa\n", 1);
-}
-
-void	sb(t_dllist *b)
-{
-	if (swap(b) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("sb\n", 1);
+	if (swap(l) && PRINT_STACK_ACTIONS)
+	{
+		ft_putchar_fd('s', 1);
+		ft_putchar_fd(l->id, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
 
 void	ss(t_dllist *a, t_dllist *b)

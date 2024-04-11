@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_down.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:54:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 16:57:03 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/06 20:04:52 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 static int	rotate(t_dllist *l);
 
-void	rra(t_dllist *a)
+void	rr_(t_dllist *l)
 {
-	if (rotate(a) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("rra\n", 1);
-}
-
-void	rrb(t_dllist *b)
-{
-	if (rotate(b) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("rrb\n", 1);
+	if (rotate(l) && PRINT_STACK_ACTIONS)
+	{
+		ft_putstr_fd("ss", 1);
+		ft_putchar_fd(l->id, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
 
 void	rrr(t_dllist *a, t_dllist *b)

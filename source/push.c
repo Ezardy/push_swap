@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:01:08 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 18:55:54 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/06 20:15:50 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 static int		push(t_dllist *a, t_dllist *b);
 t_dllist_node	*pop(t_dllist *a);
 
-void	pa(t_dllist *a, t_dllist *b)
+void	p_(t_dllist *to, t_dllist *from)
 {
-	if (push(b, a) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("pa\n", 1);
-}
-
-void	pb(t_dllist *a, t_dllist *b)
-{
-	if (push(a, b) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("pb\n", 1);
+	if (push(from, to) && PRINT_STACK_ACTIONS)
+	{
+		ft_putchar_fd('p', 1);
+		ft_putchar_fd(to->id, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
 
 static int	push(t_dllist *a, t_dllist *b)

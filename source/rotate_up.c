@@ -3,39 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_up.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:59:18 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 16:23:13 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/06 20:02:28 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-static int	rotate_down(t_dllist *l);
+static int	rotate(t_dllist *l);
 
-void	ra(t_dllist *a)
+void	r_(t_dllist *l)
 {
-	if (rotate_down(a) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("ra\n", 1);
-}
-
-void	rb(t_dllist *b)
-{
-	if (rotate_down(b) && PRINT_STACK_ACTIONS)
-		ft_putstr_fd("rb\n", 1);
+	if (rotate(l) && PRINT_STACK_ACTIONS)
+	{
+		ft_putchar_fd('r', 1);
+		ft_putchar_fd(l->id, 1);
+		ft_putchar_fd('\n', 1);
+	}
 }
 
 void	rr(t_dllist *a, t_dllist *b)
 {
 	int	tmp;
 
-	tmp = rotate_down(a);
-	if ((rotate_down(b) || tmp) && PRINT_STACK_ACTIONS)
+	tmp = rotate(a);
+	if ((rotate(b) || tmp) && PRINT_STACK_ACTIONS)
 		ft_putstr_fd("rr\n", 1);
 }
 
-static int	rotate_down(t_dllist *l)
+static int	rotate(t_dllist *l)
 {
 	int	rotated;
 

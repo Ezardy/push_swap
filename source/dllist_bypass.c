@@ -3,47 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   dllist_bypass.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zanikin <zanikin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 21:25:17 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/05 21:13:12 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/10 22:59:49 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "common.h"
 
-t_dllist_node	*dllist_last(t_dllist *l, int (*cond)(t_dllist_node *,
-						t_dllist_node *));
-
-t_dllist_node	*dllist_find(t_dllist *l, int (*cond)(int, int), int val)
+t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass,
+					t_onode *onode)
 {
-	size_t			i;
-	t_dllist_node	*node;
-	t_dllist_node	*found;
-
-	i = 0;
-	found = NULL;
-	node = l->top;
-	while (i++ < l->size && !found)
-	{
-		if (cond(node->val, val))
-			found = node;
-		else
-			node = node->prev;
-	}
-	return (found);
+	(void *)bypass;
+	onode->node = NULL;
+	return (node);
 }
 
-void	dllist_iter(t_dllist *l, void (*fun)(int))
+t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass,
+					t_onode *onode)
 {
-	size_t			i;
-	t_dllist_node	*node;
+	onode->node = node;
+	onode->order = 0;
+	return (bypass->next(node));
+}
 
-	i = 0;
-	node = l->top;
-	while (i++ < l->size)
+int	not_end_cont_cond(t_bypass *bypass, t_onode *onode)
+{
+	return (bypass->counter < bypass->depth);
+}
+
+int	matched_cont_cond(t_bypass *bypass, t_onode *onode)
+{
+	return (not_end_cont_cond(bypass, onode) && onode->node == NULL);
+}
+
+void	dllist_bypass(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+{
+	t_dllist_node	*cur;
+
+	if (node)
 	{
-		fun(node->val);
-		node = node->prev;
+		cur = bypass->init(node, bypass, onode);
+		bypass->counter = 0;
+		while (bypass->cont_cond(bypass, onode))
+		{
+			if (bypass->cond(cur, bypass, onode))
+			{
+				onode->node = cur;
+				onode->order = bypass->counter;
+			}
+			else
+			{
+				cur = bypass->next(cur);
+				bypass->counter++;
+			}
+		}
 	}
+	else
+		onode->node = NULL;
 }
