@@ -6,20 +6,31 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:06:38 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/10 21:21:29 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/11 21:56:42 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-int	eq_cond(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+int	lt_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	(void *)onode;
-	return (node->val == bypass->val);
+	return (bypass->cur->val < cur_res->val);
 }
 
-int	lt_cond(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+int	true_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
 	(void *)bypass;
-	return (node->val < onode->node->val);
+	(void *)cur_res;
+	return (1);
+}
+
+t_dllist_node	*count_action(t_bypass *bypass)
+{
+	bypass->cur->order = bypass->counter;
+	return (NULL);
+}
+
+t_dllist_node	*assign_action(t_bypass *bypass)
+{
+	return (bypass->cur);
 }

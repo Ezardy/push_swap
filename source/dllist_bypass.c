@@ -6,60 +6,53 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 21:25:17 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/10 22:59:49 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/11 20:56:27 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass,
-					t_onode *onode)
+t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass)
 {
-	(void *)bypass;
-	onode->node = NULL;
+	bypass->cur = node;
+	return (NULL);
+}
+
+t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass)
+{
+	bypass->cur = node;
+	bypass->cur = bypass->next(bypass);
 	return (node);
 }
 
-t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass,
-					t_onode *onode)
+int	not_end_cont_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	onode->node = node;
-	onode->order = 0;
-	return (bypass->next(node));
-}
-
-int	not_end_cont_cond(t_bypass *bypass, t_onode *onode)
-{
+	(void *)cur_res;
 	return (bypass->counter < bypass->depth);
 }
 
-int	matched_cont_cond(t_bypass *bypass, t_onode *onode)
+int	matched_cont_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	return (not_end_cont_cond(bypass, onode) && onode->node == NULL);
+	return (not_end_cont_cond(bypass, NULL) && cur_res == NULL);
 }
 
-void	dllist_bypass(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+t_dllist_node	*dllist_bypass(t_dllist_node *node, t_bypass *bypass)
 {
-	t_dllist_node	*cur;
+	t_dllist_node	*res;
 
 	if (node)
 	{
-		cur = bypass->init(node, bypass, onode);
+		res = bypass->init(node, bypass);
 		bypass->counter = 0;
-		while (bypass->cont_cond(bypass, onode))
+		while (bypass->cont_cond(bypass, res))
 		{
-			if (bypass->cond(cur, bypass, onode))
-			{
-				onode->node = cur;
-				onode->order = bypass->counter;
-			}
-			else
-			{
-				cur = bypass->next(cur);
-				bypass->counter++;
-			}
+			if (bypass->cond(bypass, res))
+				res = bypass->action(bypass);
+			bypass->cur = bypass->next(bypass);
+			bypass->counter++;
 		}
 	}
 	else
-		onode->node = NULL;
+		res = NULL;
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 00:11:55 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/12 15:09:21 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	sort(t_dllist *a, t_dllist *b);
 static void	a2b(t_dllist *a, t_dll_pivoted *b);
+static void	b2a(t_dllist *a, t_dll_pivoted *b);
 
 int	main(int argc, char **argv)
 {
@@ -46,31 +47,37 @@ int	main(int argc, char **argv)
 
 static void	sort(t_dllist *a, t_dllist *b)
 {
-	t_onode			onode;
+	t_dllist_node	*tmp;
 	t_dll_pivoted	dllp;
 
 	while (a->size > 5 && b->size < 3)
 		p_(b, a);
-	dllist_min(b->top, b->size, down_next, &onode);
-	dllp.pivot = onode.node;
+	dllp.pivot = dllist_min(b->top, b->size, down_next);
 	dllp.l = b;
 	dllp.upper = b->size > 1;
 	while (a->size > 5)
 		a2b(a, &dllp);
 	while (a->size > 3)
 		p_(b, a);
-	dllist_max(a->top, a->size, down_next, &onode);
-	if (onode.order == 0)
+	tmp = dllist_max(a->top, a->size, down_next);
+	if (tmp->order == 0)
 		r_(a);
-	else if (onode.order == 1)
+	else if (tmp->order == 1)
 		rr_(a);
 	if (a->top->val > a->top->prev->val)
 		s_(a);
-	// b2a_simple x2
-	// b2a
+	pop_to(b, a);
+	pop_to(b, a);
+	rot_to_top(a, dllist_min(a->top, a->size, down_next));
+	b2a(a, &dllp);
 }
 
 static void	a2b(t_dllist *a, t_dll_pivoted *b)
+{
+
+}
+
+static void	b2a(t_dllist *a, t_dll_pivoted *b)
 {
 
 }

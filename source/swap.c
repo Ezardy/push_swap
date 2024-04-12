@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:18:36 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/06 20:05:31 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/11 22:30:08 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,37 @@ static int	swap(t_dllist *a);
 
 void	s_(t_dllist *l)
 {
-	if (swap(l) && PRINT_STACK_ACTIONS)
+	if (swap(l))
 	{
-		ft_putchar_fd('s', 1);
-		ft_putchar_fd(l->id, 1);
-		ft_putchar_fd('\n', 1);
+		l->top->order = 0;
+		l->top->prev->order = 1;
+		if (PRINT_STACK_ACTIONS)
+		{
+			ft_putchar_fd('s', 1);
+			ft_putchar_fd(l->id, 1);
+			ft_putchar_fd('\n', 1);
+		}
 	}
 }
 
 void	ss(t_dllist *a, t_dllist *b)
 {
-	int	tmp;
+	int	as;
+	int	bs;
 
-	tmp = swap(a);
-	if ((swap(b) || tmp) && PRINT_STACK_ACTIONS)
+	as = swap(a);
+	if (as)
+	{
+		a->top->order = 0;
+		a->top->prev->order = 1;
+	}
+	bs = swap(b);
+	if (bs)
+	{
+		b->top->order = 0;
+		b->top->prev->order = 1;
+	}
+	if ((bs || as) && PRINT_STACK_ACTIONS)
 		ft_putstr_fd("ss\n", 1);
 }
 

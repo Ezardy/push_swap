@@ -6,36 +6,34 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:18:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/10 17:29:16 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/11 20:57:07 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-t_dllist_node	*up_next(t_dllist_node *node)
+t_dllist_node	*up_next(t_bypass *bypass)
 {
-	return (node->next);
+	return (bypass->cur->next);
 }
 
-t_dllist_node	*down_next(t_dllist_node *node)
+t_dllist_node	*down_next(t_bypass *bypass)
 {
-	return (node->prev);
+	return (bypass->cur->prev);
 }
 
-int	val_cond(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+int	eq_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	(void *)onode;
-	return (node->val == bypass->val);
+	return (bypass->cur->val == cur_res->val);
 }
 
-int	gt_cond(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+int	gt_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	(void *)bypass;
-	return (node->val > onode->node->val);
+	return (bypass->cur->val > cur_res->val);
 }
 
-int	gt_next_cond(t_dllist_node *node, t_bypass *bypass, t_onode *onode)
+int	gt_next_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	(void *)onode;
-	return (node->val > bypass->next(node)->val);
+	(void *)cur_res;
+	return (bypass->cur->val > bypass->next(bypass)->val);
 }

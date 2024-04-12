@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:40 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/10 15:52:55 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/12 14:56:45 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_sort_data
 	t_scheme		scheme;
 	size_t			from_order;
 	size_t			to_order;
-	t_onode			to_prev_onode;
 	t_dllist_node	*from_node;
 	t_dllist_node	*from_node_tmp;
 	size_t			from_order_tmp;
@@ -46,4 +45,7 @@ typedef struct s_dll_pivoted
 	t_dllist_node	*pivot;
 	size_t			upper;
 }	t_dll_pivoted;
+
+void	pop_to(t_dllist *from, t_dllist *to);
+void	rot_to_top(t_dllist *l, t_dllist_node *node);
 #endif
