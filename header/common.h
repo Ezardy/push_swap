@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/12 13:45:13 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/13 01:24:58 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_bypass
 	size_t			counter;
 	size_t			depth;
 	int				(*cont_cond)(t_bypass *, t_dllist_node *);
-	int				(*cond)(t_bypass *, t_dllist_node *);
+	int				(*cond)(t_bypass *);
 	int				val;
 }	t_bypass;
 
@@ -69,18 +69,18 @@ void			up_next(t_bypass *bypass);
 void			down_next(t_bypass *bypass);
 int				not_end_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
 int				matched_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
-int				gt_cond(t_bypass *bypass, t_dllist_node *cur_res);
-int				gt_next_cond(t_bypass *bypass, t_dllist_node *cur_res);
-int				eq_cond(t_bypass *bypass, t_dllist_node *cur_res);
-int				lt_cond(t_bypass *bypass, t_dllist_node *cur_res);
-int				true_cond(t_bypass *bypass, t_dllist_node *cur_res);
+int				gt_cond(t_bypass *bypass);
+int				gt_next_cond(t_bypass *bypass);
+int				eq_cond(t_bypass *bypass);
+int				lt_cond(t_bypass *bypass);
+int				true_cond(t_bypass *bypass);
 
 t_dllist_node	*dllist_find(t_dllist_node *start, size_t depth, int val);
 t_dllist_node	*dllist_max(t_dllist_node *start, size_t depth,
 					t_dllist_node *(*next)(t_dllist_node *));
 t_dllist_node	*dllist_min(t_dllist_node *start, size_t depth,
 					t_dllist_node *(*next)(t_dllist_node *));
-t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth,
+t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth, int val,
 					t_dllist_node *(*next)(t_dllist_node *));
 
 t_dllist		*read_numbers(char **params, int pcount);

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:40 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/12 14:56:45 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/13 20:51:23 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,30 @@
 
 typedef struct s_scheme
 {
-	int		a;
-	int		b;
-	size_t	moves_count;
-}	t_scheme;
-
-typedef struct s_sort_data
-{
-	int				from_perm;
-	t_scheme		scheme;
-	size_t			from_order;
-	size_t			to_order;
+	int				is_upper;
+	int				from_scheme;
+	int				to_scheme;
+	size_t			from_count;
+	size_t			to_count;
+	size_t			moves_count;
+	t_dllist_node	*to_node;
 	t_dllist_node	*from_node;
-	t_dllist_node	*from_node_tmp;
-	size_t			from_order_tmp;
-	size_t			to_order_tmp;
-	t_scheme		scheme_tmp;
-}	t_sort_data;
+}	t_scheme;
 
 typedef struct s_dll_pivoted
 {
 	t_dllist		*l;
+	t_dllist_node	*upper;
 	t_dllist_node	*pivot;
-	size_t			upper;
+	t_dllist_node	*lower;
 }	t_dll_pivoted;
 
 void	pop_to(t_dllist *from, t_dllist *to);
-void	rot_to_top(t_dllist *l, t_dllist_node *node);
+void	rot_to_bottom(t_dllist *l, t_dllist_node *node);
+size_t	abs_diff(size_t a, size_t b);
+size_t	ft_max(size_t a, size_t b);
+size_t	ft_min(size_t a, size_t b);
+void	select_scheme(t_scheme *sdata, size_t f_s, size_t t_s, size_t f_o);
+void	select_upper_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme);
+void	execute_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme);
 #endif

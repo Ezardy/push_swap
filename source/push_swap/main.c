@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/12 15:09:21 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/13 21:13:53 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,64 @@ int	main(int argc, char **argv)
 
 static void	sort(t_dllist *a, t_dllist *b)
 {
-	t_dllist_node	*tmp;
 	t_dll_pivoted	dllp;
 
 	while (a->size > 5 && b->size < 3)
 		p_(b, a);
 	dllp.pivot = dllist_min(b->top, b->size, down_next);
 	dllp.l = b;
-	dllp.upper = b->size > 1;
+	if (dllp.pivot && b->size > 1)
+		dllp.upper = dllp.pivot->next;
+	else
+		dllp.upper = NULL;
+	if (dllp.pivot && b->size > 2)
+		dllp.lower = dllp.pivot->prev;
+	else
+		dllp.lower = NULL;
 	while (a->size > 5)
 		a2b(a, &dllp);
 	while (a->size > 3)
 		p_(b, a);
-	tmp = dllist_max(a->top, a->size, down_next);
-	if (tmp->order == 0)
-		r_(a);
-	else if (tmp->order == 1)
-		rr_(a);
+	rot_to_bottom(a, dllist_max(a->top, a->size, down_next));
 	if (a->top->val > a->top->prev->val)
 		s_(a);
 	pop_to(b, a);
 	pop_to(b, a);
-	rot_to_top(a, dllist_min(a->top, a->size, down_next));
+	rot_to_bottom(a, dllist_max(a->top, a->size, down_next));
 	b2a(a, &dllp);
 }
 
 static void	a2b(t_dllist *a, t_dll_pivoted *b)
 {
+	t_scheme		scheme_tmp;
+	t_scheme		scheme;
+	size_t			from_order;
 
+	from_order = 0;
+	scheme_tmp.from_node = a->top;
+	scheme.moves_count = ULONG_MAX;
+	while (from_order < a->size)
+	{
+		select_upper_scheme(a, b, &scheme_tmp);
+		if (scheme_tmp.moves_count < scheme.moves_count)
+			scheme = scheme_tmp;
+		scheme_tmp.is_upper = 0;
+		scheme_tmp.to_node = dllist_bigger(b->pivot, abs_diff(b->lower->order,
+					b->pivot->order) + 1, scheme_tmp.from_node->val, down_next);
+		if (!scheme_tmp.to_node)
+			scheme_tmp.to_node = b->lower->prev;
+		select_scheme(&scheme_tmp, a->size, b->l->size, from_order++);
+		if (scheme_tmp.moves_count < scheme.moves_count)
+			scheme = scheme_tmp;
+		scheme_tmp.from_node = scheme_tmp.from_node->prev;
+	}
+	execute_scheme(a, b, &scheme);
 }
 
 static void	b2a(t_dllist *a, t_dll_pivoted *b)
 {
-
+	while (b->l->size)
+	{
+		
+	}
 }

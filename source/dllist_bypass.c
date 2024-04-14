@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 21:25:17 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 20:56:27 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/13 01:06:12 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_dllist_node	*dllist_bypass(t_dllist_node *node, t_bypass *bypass)
 		bypass->counter = 0;
 		while (bypass->cont_cond(bypass, res))
 		{
-			if (bypass->cond(bypass, res))
+			if (bypass->cond(bypass))
 				res = bypass->action(bypass);
 			bypass->cur = bypass->next(bypass);
 			bypass->counter++;

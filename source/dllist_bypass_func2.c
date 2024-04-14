@@ -6,21 +6,20 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:06:38 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 21:56:42 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/13 01:07:57 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-int	lt_cond(t_bypass *bypass, t_dllist_node *cur_res)
+int	lt_cond(t_bypass *bypass)
 {
-	return (bypass->cur->val < cur_res->val);
+	return (bypass->cur->val < bypass->val);
 }
 
-int	true_cond(t_bypass *bypass, t_dllist_node *cur_res)
+int	true_cond(t_bypass *bypass)
 {
 	(void *)bypass;
-	(void *)cur_res;
 	return (1);
 }
 
@@ -32,5 +31,6 @@ t_dllist_node	*count_action(t_bypass *bypass)
 
 t_dllist_node	*assign_action(t_bypass *bypass)
 {
+	bypass->val = bypass->cur->val;
 	return (bypass->cur);
 }
