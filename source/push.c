@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 19:01:08 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 22:24:13 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/14 23:05:55 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	p_(t_dllist *to, t_dllist *from)
 {
 	if (push(from, to))
 	{
-		dll_numerate(to);
-		dll_numerate(from);
+		to->ordered = 0;
+		from->ordered = 0;
 		if (PRINT_STACK_ACTIONS)
 		{
 			ft_putchar_fd('p', 1);

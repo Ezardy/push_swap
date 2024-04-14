@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 01:24:58 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/14 22:59:53 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_dllist
 	t_dllist_node	*top;
 	size_t			size;
 	char			id;
+	int				ordered;
 }	t_dllist;
 
 typedef struct s_bypass

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:11:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 22:10:28 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/14 23:04:02 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_dllist	*create_dllist(char id)
 		l->id = id;
 		l->size = 0;
 		l->top = NULL;
+		l->ordered = 0;
 	}
 	return (l);
 }
@@ -93,11 +94,15 @@ void	dll_numerate(t_dllist *l)
 {
 	t_bypass	bypass;
 
-	bypass.depth = l->size;
-	bypass.init = first_match_init;
-	bypass.cont_cond = not_end_cont_cond;
-	bypass.cond = true_cond;
-	bypass.action = count_action;
-	bypass.next = down_next;
-	dllist_bypass(l->top, &bypass);
+	if (!l->ordered)
+	{
+		bypass.depth = l->size;
+		bypass.init = first_match_init;
+		bypass.cont_cond = not_end_cont_cond;
+		bypass.cond = true_cond;
+		bypass.action = count_action;
+		bypass.next = down_next;
+		dllist_bypass(l->top, &bypass);
+		l->ordered = 1;
+	}
 }

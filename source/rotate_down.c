@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:54:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 22:34:01 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/14 23:11:08 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	rr_(t_dllist *l)
 {
 	if (rotate(l))
 	{
-		dll_numerate(l);
+		l->ordered = 0;
 		if (PRINT_STACK_ACTIONS)
 		{
-			ft_putstr_fd("rr", 1);
+			ft_putstr_fd("ss", 1);
 			ft_putchar_fd(l->id, 1);
 			ft_putchar_fd('\n', 1);
 		}
@@ -34,12 +34,12 @@ void	rrr(t_dllist *a, t_dllist *b)
 	int	br;
 
 	ar = rotate(a);
-	if (ar)
-		dll_numerate(a);
 	br = rotate(b);
+	if (ar)
+		a->ordered = 0;
 	if (br)
-		dll_numerate(b);
-	if ((br || ar) && PRINT_STACK_ACTIONS)
+		b->ordered = 0;
+	if ((ar || br) && PRINT_STACK_ACTIONS)
 		ft_putstr_fd("rrr\n", 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 21:13:53 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 00:13:47 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ static void	sort(t_dllist *a, t_dllist *b)
 {
 	t_dll_pivoted	dllp;
 
-	while (a->size > 5 && b->size < 3)
-		p_(b, a);
+	func2_c(b, a, p_, ft_min(3, (a->size > 5) * (a->size - 5)));
 	dllp.pivot = dllist_min(b->top, b->size, down_next);
 	dllp.l = b;
 	if (dllp.pivot && b->size > 1)
@@ -63,8 +62,7 @@ static void	sort(t_dllist *a, t_dllist *b)
 		dllp.lower = NULL;
 	while (a->size > 5)
 		a2b(a, &dllp);
-	while (a->size > 3)
-		p_(b, a);
+	func2_c(b, a, p_, a->size - 3);
 	rot_to_bottom(a, dllist_max(a->top, a->size, down_next));
 	if (a->top->val > a->top->prev->val)
 		s_(a);
@@ -83,6 +81,8 @@ static void	a2b(t_dllist *a, t_dll_pivoted *b)
 	from_order = 0;
 	scheme_tmp.from_node = a->top;
 	scheme.moves_count = ULONG_MAX;
+	dll_numerate(a);
+	dll_numerate(b->l);
 	while (from_order < a->size)
 	{
 		select_upper_scheme(a, b, &scheme_tmp);
@@ -103,8 +103,24 @@ static void	a2b(t_dllist *a, t_dll_pivoted *b)
 
 static void	b2a(t_dllist *a, t_dll_pivoted *b)
 {
-	while (b->l->size)
+	rot_to_top(b->l, b->upper);
+	while (b->lower || b->upper)
 	{
-		
+		if ((!b->lower || a->top->next->val > b->lower->val)
+			&& (!b->upper || a->top->next->val > b->upper->val))
+			rr_(a);
+		else
+		{
+			if (b->upper && (!b->lower || b->upper->val > b->lower->val))
+				p_(a, b->l);
+			else if (b->lower)
+			{
+				rr_(b->l);
+				p_(a, b->l);
+			}
+		}
 	}
+	if (a->top->next->val < b->pivot->val)
+		rr_(a);
+	p_(a, b->l);
 }

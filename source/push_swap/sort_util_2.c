@@ -6,22 +6,51 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:53:13 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 16:45:13 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/14 23:19:07 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	func_c(t_dllist *l, void (*func)(t_dllist *), size_t count)
+{
+	while (count--)
+		func(l);
+}
+
+void	func2_c(t_dllist *a, t_dllist *b, void (*func2)(t_dllist *, t_dllist *),
+			size_t count)
+{
+	while (count--)
+		func2(a, b);
+}
+
 void	rot_to_bottom(t_dllist *l, t_dllist_node *node)
 {
-	void			(*rot)(t_dllist *);
+	size_t	up;
+	size_t	down;
 
-	if (node->order + 1 < l->size - node->order - 1)
-		rot = r_;
+	dll_numerate(l);
+	up = node->order + 1;
+	down = l->size - node->order - 1;
+	if (up < down)
+		func_c(l, r_, up);
 	else
-		rot = rr_;
-	while (node->order < l->size - 1)
-		rot(l);
+		func_c(l, rr_, down);
+}
+
+void	rot_to_top(t_dllist *l, t_dllist_node *node)
+{
+	size_t	up;
+	size_t	down;
+
+	dll_numerate(l);
+	up = node->order;
+	down = l->size - node->order;
+	if (up < down)
+		func_c(l, r_, up);
+	else
+		func_c(l, rr_, down);
 }
 
 void	pop_to(t_dllist *from, t_dllist *to)
@@ -32,37 +61,4 @@ void	pop_to(t_dllist *from, t_dllist *to)
 	if (bigger)
 		rot_to_bottom(to, bigger);
 	p_(to, from);
-}
-
-size_t	abs_diff(size_t a, size_t b)
-{
-	size_t	diff;
-
-	if (a > b)
-		diff = a - b;
-	else
-		diff = b - a;
-	return (diff);
-}
-
-size_t	ft_max(size_t a, size_t b)
-{
-	size_t	max;
-
-	if (a > b)
-		max = a;
-	else
-		max = b;
-	return (max);
-}
-
-size_t	ft_min(size_t a, size_t b)
-{
-	size_t	min;
-
-	if (a > b)
-		min = b;
-	else
-		min = a;
-	return (min);
 }
