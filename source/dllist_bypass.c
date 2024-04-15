@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 21:25:17 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 13:55:22 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 22:30:20 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass)
 t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass)
 {
 	bypass->cur = node;
+	bypass->val = node->val;
 	bypass->cur = bypass->next(bypass);
 	return (node);
 }
