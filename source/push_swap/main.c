@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 13:41:40 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:02:19 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 		b = create_dllist('b');
 		if (b)
 		{
-			if (a->size > 3)
+			if (a->size > 2)
 				sort(a, b);
 			else if (a->top->val > a->top->prev->val)
 				s_(a);
