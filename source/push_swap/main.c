@@ -6,11 +6,12 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 00:13:47 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:41:40 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 
 static void	sort(t_dllist *a, t_dllist *b);
 static void	a2b(t_dllist *a, t_dll_pivoted *b);

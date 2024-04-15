@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:10:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 01:08:13 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:46:19 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_dllist_node	*dllist_find(t_dllist_node *start, size_t depth, int val)
 }
 
 t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth, int val,
-			t_dllist_node *(*next)(t_dllist_node *))
+			t_dllist_node *(*next)(t_bypass *))
 {
 	t_bypass	bypass;
 
@@ -42,7 +42,7 @@ t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth, int val,
 }
 
 t_dllist_node	*dllist_max(t_dllist_node *start, size_t depth,
-			t_dllist_node *(*next)(t_dllist_node *))
+			t_dllist_node *(*next)(t_bypass *))
 {
 	t_bypass	bypass;
 
@@ -56,7 +56,7 @@ t_dllist_node	*dllist_max(t_dllist_node *start, size_t depth,
 }
 
 t_dllist_node	*dllist_min(t_dllist_node *start, size_t depth,
-			t_dllist_node *(*next)(t_dllist_node *))
+			t_dllist_node *(*next)(t_bypass *))
 {
 	t_bypass	bypass;
 

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:06:38 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 01:07:57 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:55:44 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	lt_cond(t_bypass *bypass)
 
 int	true_cond(t_bypass *bypass)
 {
-	(void *)bypass;
+	(void)bypass;
 	return (1);
 }
 

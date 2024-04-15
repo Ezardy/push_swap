@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 21:25:17 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 01:06:12 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:55:22 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass)
 
 int	not_end_cont_cond(t_bypass *bypass, t_dllist_node *cur_res)
 {
-	(void *)cur_res;
+	(void)cur_res;
 	return (bypass->counter < bypass->depth);
 }
 

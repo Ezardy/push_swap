@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/14 22:59:53 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:48:44 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ typedef struct s_dllist
 typedef struct s_bypass
 {
 	t_dllist_node	*cur;
-	t_dllist_node	*(*next)(t_bypass *);
-	t_dllist_node	*(*init)(t_dllist_node *, t_bypass *);
-	t_dllist_node	*(*action)(t_bypass *);
+	t_dllist_node	*(*next)(struct s_bypass *);
+	t_dllist_node	*(*init)(t_dllist_node *, struct s_bypass *);
+	t_dllist_node	*(*action)(struct s_bypass *);
 	size_t			counter;
 	size_t			depth;
-	int				(*cont_cond)(t_bypass *, t_dllist_node *);
-	int				(*cond)(t_bypass *);
+	int				(*cont_cond)(struct s_bypass *, t_dllist_node *);
+	int				(*cond)(struct s_bypass *);
 	int				val;
 }	t_bypass;
 
@@ -66,8 +66,8 @@ t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass);
 t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass);
 t_dllist_node	*count_action(t_bypass *bypass);
 t_dllist_node	*assign_action(t_bypass *bypass);
-void			up_next(t_bypass *bypass);
-void			down_next(t_bypass *bypass);
+t_dllist_node	*up_next(t_bypass *bypass);
+t_dllist_node	*down_next(t_bypass *bypass);
 int				not_end_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
 int				matched_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
 int				gt_cond(t_bypass *bypass);
@@ -78,11 +78,11 @@ int				true_cond(t_bypass *bypass);
 
 t_dllist_node	*dllist_find(t_dllist_node *start, size_t depth, int val);
 t_dllist_node	*dllist_max(t_dllist_node *start, size_t depth,
-					t_dllist_node *(*next)(t_dllist_node *));
+					t_dllist_node *(*next)(t_bypass *));
 t_dllist_node	*dllist_min(t_dllist_node *start, size_t depth,
-					t_dllist_node *(*next)(t_dllist_node *));
+					t_dllist_node *(*next)(t_bypass *));
 t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth, int val,
-					t_dllist_node *(*next)(t_dllist_node *));
+					t_dllist_node *(*next)(t_bypass *));
 
 t_dllist		*read_numbers(char **params, int pcount);
 #endif

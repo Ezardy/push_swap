@@ -6,14 +6,15 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:29:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 21:09:44 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:53:25 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	set_funcs(t_scheme *scheme, void (**rota)(t_dllist *),
-				void (**rotb)(t_dllist *), void (**prot)(t_dllist *));
+				void (**rotb)(t_dllist *), void (**prot)(t_dllist *,
+					t_dllist *));
 static void	set_scheme(t_scheme *scm, size_t f, size_t t, int s);
 
 void	select_upper_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
@@ -70,7 +71,7 @@ static void	set_scheme(t_scheme *scm, size_t f, size_t t, int s)
 void	execute_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
 {
 	void	(*rota)(t_dllist *);
-	void	(*rotb)(t_bypass *);
+	void	(*rotb)(t_dllist *);
 	void	(*prot)(t_dllist *, t_dllist *);
 	size_t	acts;
 
@@ -94,7 +95,8 @@ void	execute_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
 }
 
 static void	set_funcs(t_scheme *scheme, void (**rota)(t_dllist *),
-				void (**rotb)(t_dllist *), void (**prot)(t_dllist *))
+				void (**rotb)(t_dllist *), void (**prot)(t_dllist *,
+				t_dllist *))
 {
 	if (scheme->from_scheme == R_)
 		*rota = r_;
