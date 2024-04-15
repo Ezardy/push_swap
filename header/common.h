@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 13:48:44 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:17:19 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_bypass
 	int				(*cont_cond)(struct s_bypass *, t_dllist_node *);
 	int				(*cond)(struct s_bypass *);
 	int				val;
+	int				const_val;
 }	t_bypass;
 
 void			s_(t_dllist *l);
@@ -62,8 +63,8 @@ int				dllist_push_back(t_dllist *l, int val);
 int				dll_is_sorted(t_dllist *l);
 
 t_dllist_node	*dllist_bypass(t_dllist_node *node, t_bypass *bypass);
-t_dllist_node	*first_match_init(t_dllist_node *node, t_bypass *bypass);
-t_dllist_node	*last_match_init(t_dllist_node *node, t_bypass *bypass);
+t_dllist_node	*null_init(t_dllist_node *node, t_bypass *bypass);
+t_dllist_node	*first_init(t_dllist_node *node, t_bypass *bypass);
 t_dllist_node	*count_action(t_bypass *bypass);
 t_dllist_node	*assign_action(t_bypass *bypass);
 t_dllist_node	*up_next(t_bypass *bypass);

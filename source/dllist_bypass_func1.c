@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:18:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/13 01:04:21 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:17:56 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_dllist_node	*down_next(t_bypass *bypass)
 
 int	eq_cond(t_bypass *bypass)
 {
-	return (bypass->cur->val == bypass->val);
+	return (bypass->cur->val == bypass->const_val);
 }
 
 int	gt_cond(t_bypass *bypass)

@@ -6,11 +6,16 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:06:38 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 13:55:44 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 23:21:01 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
+
+int	gt_ltd_cond(t_bypass *bypass)
+{
+	return (bypass->cur->val > bypass->const_val);
+}
 
 int	lt_cond(t_bypass *bypass)
 {
