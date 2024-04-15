@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 16:21:27 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:39:35 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,18 @@ static void	b2a(t_dllist *a, t_dll_pivoted *b)
 		{
 			if (b->upper && (!b->lower || b->upper->val > b->lower->val))
 			{
-				p_(a, b->l);
 				b->upper = b->upper->prev;
 				if (b->upper == b->pivot)
 					b->upper = NULL;
+				p_(a, b->l);
 			}
 			else if (b->lower)
 			{
-				rr_(b->l);
-				p_(a, b->l);
 				b->lower = b->lower->next;
 				if (b->lower == b->pivot)
 					b->lower = NULL;
+				rr_(b->l);
+				p_(a, b->l);
 			}
 		}
 	}
