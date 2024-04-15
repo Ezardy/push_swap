@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:29:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 13:53:25 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 17:00:04 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	execute_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
 	acts = scheme->to_count;
 	while (acts--)
 		rotb(b->l);
-	p_(a, b->l);
+	p_(b->l, a);
 	if (scheme->from_node->val < b->pivot->val)
 		b->pivot = scheme->from_node;
 	else if (scheme->is_upper && scheme->from_node->val > b->upper->val)

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 14:23:18 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:21:27 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void	sort(t_dllist *a, t_dllist *b);
 static void	a2b(t_dllist *a, t_dll_pivoted *b);
 static void	b2a(t_dllist *a, t_dll_pivoted *b);
+static void	align(t_dllist *a, t_dll_pivoted *b);
 
 int	main(int argc, char **argv)
 {
@@ -71,6 +72,7 @@ static void	sort(t_dllist *a, t_dllist *b)
 	pop_to(b, a);
 	rot_to_bottom(a, dllist_max(a->top, a->size, down_next));
 	b2a(a, &dllp);
+	align(a, &dllp);
 }
 
 static void	a2b(t_dllist *a, t_dll_pivoted *b)
@@ -113,15 +115,28 @@ static void	b2a(t_dllist *a, t_dll_pivoted *b)
 		else
 		{
 			if (b->upper && (!b->lower || b->upper->val > b->lower->val))
+			{
 				p_(a, b->l);
+				b->upper = b->upper->prev;
+				if (b->upper == b->pivot)
+					b->upper = NULL;
+			}
 			else if (b->lower)
 			{
 				rr_(b->l);
 				p_(a, b->l);
+				b->lower = b->lower->next;
+				if (b->lower == b->pivot)
+					b->lower = NULL;
 			}
 		}
 	}
-	if (b->pivot && a->top->next->val < b->pivot->val)
+}
+
+static void	align(t_dllist *a, t_dll_pivoted *b)
+{
+	if (b->pivot && a->top->next->val > b->pivot->val)
 		rr_(a);
 	p_(a, b->l);
+	rot_to_top(a, dllist_min(a->top, a->size, down_next));
 }
