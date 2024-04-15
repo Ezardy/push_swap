@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 17:54:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/14 23:11:08 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:27:11 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	rr_(t_dllist *l)
 		l->ordered = 0;
 		if (PRINT_STACK_ACTIONS)
 		{
-			ft_putstr_fd("ss", 1);
+			ft_putstr_fd("rr", 1);
 			ft_putchar_fd(l->id, 1);
 			ft_putchar_fd('\n', 1);
 		}

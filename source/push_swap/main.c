@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 14:02:19 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:23:18 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	b2a(t_dllist *a, t_dll_pivoted *b)
 			}
 		}
 	}
-	if (a->top->next->val < b->pivot->val)
+	if (b->pivot && a->top->next->val < b->pivot->val)
 		rr_(a);
 	p_(a, b->l);
 }

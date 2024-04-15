@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:53:13 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 14:15:58 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/15 14:21:54 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ void	rot_to_bottom(t_dllist *l, t_dllist_node *node)
 	size_t	up;
 	size_t	down;
 
-	dll_numerate(l);
-	up = node->order + 1;
-	down = l->size - node->order - 1;
-	if (up < down)
-		func_c(l, r_, up);
-	else
-		func_c(l, rr_, down);
+	if (node)
+	{
+		dll_numerate(l);
+		up = node->order + 1;
+		down = l->size - node->order - 1;
+		if (up < down)
+			func_c(l, r_, up);
+		else
+			func_c(l, rr_, down);
+	}
 }
 
 void	rot_to_top(t_dllist *l, t_dllist_node *node)
@@ -44,13 +47,16 @@ void	rot_to_top(t_dllist *l, t_dllist_node *node)
 	size_t	up;
 	size_t	down;
 
-	dll_numerate(l);
-	up = node->order;
-	down = l->size - node->order;
-	if (up < down)
-		func_c(l, r_, up);
-	else
-		func_c(l, rr_, down);
+	if (node)
+	{
+		dll_numerate(l);
+		up = node->order;
+		down = l->size - node->order;
+		if (up < down)
+			func_c(l, r_, up);
+		else
+			func_c(l, rr_, down);
+	}
 }
 
 void	pop_to(t_dllist *from, t_dllist *to)
