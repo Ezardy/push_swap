@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:29:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 17:02:18 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 21:48:55 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	select_upper_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
 				b->upper->order) + 1, scheme->from_node->val, up_next);
 	if (!scheme->to_node)
 		scheme->to_node = b->upper;
-	else
+	else if (scheme->to_node != b->pivot)
 		scheme->to_node = scheme->to_node->prev;
 	select_scheme(scheme, a->size, b->l->size, scheme->from_node->order);
 }

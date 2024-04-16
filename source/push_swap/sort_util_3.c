@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:56:29 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/14 18:38:09 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 22:46:57 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ size_t	ft_min(size_t a, size_t b)
 	else
 		min = a;
 	return (min);
+}
+
+int	pick_from_stock(t_dllist *a, t_dll_pivoted *b, unsigned int *stock)
+{
+	int	picked;
+
+	if (*stock && (!b->lower || a->top->next->val > b->lower->val)
+		&& (!b->upper || a->top->next->val > b->upper->val))
+	{
+		picked = 1;
+		*stock -= 1;
+	}
+	else
+		picked = 0;
+	return (picked);
 }

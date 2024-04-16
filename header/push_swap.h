@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:40 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/16 14:28:21 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 22:47:16 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void	execute_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme);
 void	func_c(t_dllist *l, void (*func)(t_dllist *), size_t count);
 void	func2_c(t_dllist *a, t_dllist *b, void (*func2)(t_dllist *, t_dllist *),
 			size_t count);
+int		pick_from_stock(t_dllist *a, t_dll_pivoted *b, unsigned int *stock);
 #endif

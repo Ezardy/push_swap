@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/16 16:02:45 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/17 00:27:45 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static void	sort(t_dllist *a, t_dllist *b);
 static void	a2b(t_dllist *a, t_dll_pivoted *b);
-static void	b2a(t_dllist *a, t_dll_pivoted *b);
-static void	align(t_dllist *a, t_dll_pivoted *b);
+static int	b2a(t_dllist *a, t_dll_pivoted *b);
+static void	align(t_dllist *a, t_dll_pivoted *b, unsigned int stock);
 
 int	main(int argc, char **argv)
 {
@@ -71,8 +71,7 @@ static void	sort(t_dllist *a, t_dllist *b)
 	pop_to(b, a);
 	pop_to(b, a);
 	rot_to_bottom(a, dllist_max(a->top, a->size, down_next));
-	b2a(a, &dllp);
-	align(a, &dllp);
+	align(a, &dllp, b2a(a, &dllp));
 }
 
 static void	a2b(t_dllist *a, t_dll_pivoted *b)
@@ -103,39 +102,39 @@ static void	a2b(t_dllist *a, t_dll_pivoted *b)
 	}
 	execute_scheme(a, b, &scheme);
 }
-// 3 2 9 1 4 7 6 5 8 10
-static void	b2a(t_dllist *a, t_dll_pivoted *b)
+
+static int	b2a(t_dllist *a, t_dll_pivoted *b)
 {
+	unsigned int	stock;
+
+	stock = 5;
 	rot_to_top(b->l, b->upper);
-	while (b->lower || b->upper)
+	while (b->lower || b->upper || stock)
 	{
-		if ((b->lower == NULL || a->top->next->val > b->lower->val)
-			&& (b->upper == NULL || a->top->next->val > b->upper->val))
+		if (pick_from_stock(a, b, &stock))
 			rr_(a);
-		else
+		else if (b->upper && (!b->lower || b->upper->val > b->lower->val))
 		{
-			if (b->upper && (b->lower == NULL || b->upper->val > b->lower->val))
-			{
-				b->upper = b->upper->prev;
-				if (b->upper->val == b->pivot->val)
-					b->upper = NULL;
-				p_(a, b->l);
-			}
-			else if (b->lower)
-			{
-				b->lower = b->lower->next;
-				if (b->lower->val == b->pivot->val)
-					b->lower = NULL;
-				rr_(b->l);
-				p_(a, b->l);
-			}
+			b->upper = b->upper->prev;
+			if (b->upper->val == b->pivot->val)
+				b->upper = NULL;
+			p_(a, b->l);
+		}
+		else if (b->lower)
+		{
+			b->lower = b->lower->next;
+			if (b->lower->val == b->pivot->val)
+				b->lower = NULL;
+			rr_(b->l);
+			p_(a, b->l);
 		}
 	}
+	return (stock);
 }
 
-static void	align(t_dllist *a, t_dll_pivoted *b)
+static void	align(t_dllist *a, t_dll_pivoted *b, unsigned int stock)
 {
-	if (b->pivot && a->top->next->val > b->pivot->val)
+	if (stock && b->pivot && a->top->next->val > b->pivot->val)
 		rr_(a);
 	p_(a, b->l);
 	rot_to_top(a, dllist_min(a->top, a->size, down_next));
