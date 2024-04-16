@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 17:39:35 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 16:02:45 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,28 +103,28 @@ static void	a2b(t_dllist *a, t_dll_pivoted *b)
 	}
 	execute_scheme(a, b, &scheme);
 }
-
+// 3 2 9 1 4 7 6 5 8 10
 static void	b2a(t_dllist *a, t_dll_pivoted *b)
 {
 	rot_to_top(b->l, b->upper);
 	while (b->lower || b->upper)
 	{
-		if ((!b->lower || a->top->next->val > b->lower->val)
-			&& (!b->upper || a->top->next->val > b->upper->val))
+		if ((b->lower == NULL || a->top->next->val > b->lower->val)
+			&& (b->upper == NULL || a->top->next->val > b->upper->val))
 			rr_(a);
 		else
 		{
-			if (b->upper && (!b->lower || b->upper->val > b->lower->val))
+			if (b->upper && (b->lower == NULL || b->upper->val > b->lower->val))
 			{
 				b->upper = b->upper->prev;
-				if (b->upper == b->pivot)
+				if (b->upper->val == b->pivot->val)
 					b->upper = NULL;
 				p_(a, b->l);
 			}
 			else if (b->lower)
 			{
 				b->lower = b->lower->next;
-				if (b->lower == b->pivot)
+				if (b->lower->val == b->pivot->val)
 					b->lower = NULL;
 				rr_(b->l);
 				p_(a, b->l);
