@@ -17,7 +17,7 @@ CHECKER_BUILD_PATH=$(BUILD_DIR)/$(CHECKER_DIR)
 PUSH_SWAP_MODULES=main sort_util_1 sort_util_2 sort_util_3
 CHECKER_MODULES=main
 COMMON_MODULES=numbers_reader ft_atoi_safe push swap rotate_up rotate_down dllist dllist_bypass \
-dllist_bypass_algo dllist_bypass_func1 dllist_bypass_func2
+dllist_bypass_algo dllist_bypass_func1 dllist_bypass_func2 dllist_bypass_func3
 
 PUSH_SWAP_OBJ=$(addprefix $(PUSH_SWAP_BUILD_PATH)/, $(addsuffix .o, $(PUSH_SWAP_MODULES)))
 CHECKER_OBJ=$(addprefix $(CHECKER_BUILD_PATH)/, $(addsuffix .o, $(CHECKER_MODULES)))

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:10:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 23:19:21 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:28:47 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ t_dllist_node	*dllist_big_neigh(t_dllist *l, int val)
 {
 	t_bypass	bypass;
 
+	bypass.val = INT_MAX;
 	bypass.const_val = val;
 	bypass.init = null_init;
 	bypass.cont_cond = not_end_cont_cond;
-
-	bypass.action = assign_action;
+	bypass.cond = gt_ltd_cond;
+	bypass.action = diff_action;
 	bypass.next = down_next;
 	bypass.depth = l->size;
 	return (dllist_bypass(l->top, &bypass));

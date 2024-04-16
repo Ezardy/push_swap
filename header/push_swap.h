@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:40 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/14 22:30:25 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:28:21 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define S_ 4
 # define OI_ 0
 # include "common.h"
-# include <limits.h>
 
 typedef struct s_scheme
 {

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:02:56 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 23:17:19 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:28:28 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # endif
 
 # include "libft/libft.h"
+# include <limits.h>
 
 typedef struct s_dllist_node
 {
@@ -67,12 +68,14 @@ t_dllist_node	*null_init(t_dllist_node *node, t_bypass *bypass);
 t_dllist_node	*first_init(t_dllist_node *node, t_bypass *bypass);
 t_dllist_node	*count_action(t_bypass *bypass);
 t_dllist_node	*assign_action(t_bypass *bypass);
+t_dllist_node	*diff_action(t_bypass *bypass);
 t_dllist_node	*up_next(t_bypass *bypass);
 t_dllist_node	*down_next(t_bypass *bypass);
 int				not_end_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
 int				matched_cont_cond(t_bypass *bypass, t_dllist_node *cur_res);
 int				gt_cond(t_bypass *bypass);
 int				gt_next_cond(t_bypass *bypass);
+int				gt_ltd_cond(t_bypass *bypass);
 int				eq_cond(t_bypass *bypass);
 int				lt_cond(t_bypass *bypass);
 int				true_cond(t_bypass *bypass);
@@ -84,6 +87,7 @@ t_dllist_node	*dllist_min(t_dllist_node *start, size_t depth,
 					t_dllist_node *(*next)(t_bypass *));
 t_dllist_node	*dllist_bigger(t_dllist_node *start, size_t depth, int val,
 					t_dllist_node *(*next)(t_bypass *));
+t_dllist_node	*dllist_big_neigh(t_dllist *l, int val);
 
 t_dllist		*read_numbers(char **params, int pcount);
 #endif

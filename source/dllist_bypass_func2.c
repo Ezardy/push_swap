@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:06:38 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 23:21:01 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:14:16 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	gt_ltd_cond(t_bypass *bypass)
 {
-	return (bypass->cur->val > bypass->const_val);
+	return (bypass->cur->val > bypass->const_val && bypass->val
+		> (bypass->cur->val - bypass->const_val));
 }
 
 int	lt_cond(t_bypass *bypass)
@@ -22,20 +23,17 @@ int	lt_cond(t_bypass *bypass)
 	return (bypass->cur->val < bypass->val);
 }
 
-int	true_cond(t_bypass *bypass)
+int	eq_cond(t_bypass *bypass)
 {
-	(void)bypass;
-	return (1);
+	return (bypass->cur->val == bypass->const_val);
 }
 
-t_dllist_node	*count_action(t_bypass *bypass)
+int	gt_cond(t_bypass *bypass)
 {
-	bypass->cur->order = bypass->counter;
-	return (NULL);
+	return (bypass->cur->val > bypass->val);
 }
 
-t_dllist_node	*assign_action(t_bypass *bypass)
+int	gt_next_cond(t_bypass *bypass)
 {
-	bypass->val = bypass->cur->val;
-	return (bypass->cur);
+	return (bypass->cur->val > bypass->next(bypass)->val);
 }

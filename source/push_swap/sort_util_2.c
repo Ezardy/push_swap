@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:53:13 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 15:05:36 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:53:47 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void	pop_to(t_dllist *from, t_dllist *to)
 
 	if (from->size)
 	{
-		bigger = dllist_bigger(to->top, to->size, from->top->val, down_next);
+		bigger = dllist_big_neigh(to, from->top->val);
 		if (bigger)
 			rot_to_top(to, bigger);
+		else
+			rot_to_top(to, dllist_min(to->top, to->size, down_next));
 		p_(to, from);
 	}
 }

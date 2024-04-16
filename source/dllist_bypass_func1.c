@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:18:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 23:17:56 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/16 14:14:05 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,22 @@ t_dllist_node	*down_next(t_bypass *bypass)
 	return (bypass->cur->prev);
 }
 
-int	eq_cond(t_bypass *bypass)
+t_dllist_node	*null_init(t_dllist_node *node, t_bypass *bypass)
 {
-	return (bypass->cur->val == bypass->const_val);
+	bypass->cur = node;
+	return (NULL);
 }
 
-int	gt_cond(t_bypass *bypass)
+t_dllist_node	*first_init(t_dllist_node *node, t_bypass *bypass)
 {
-	return (bypass->cur->val > bypass->val);
+	bypass->cur = node;
+	bypass->val = node->val;
+	bypass->cur = bypass->next(bypass);
+	return (node);
 }
 
-int	gt_next_cond(t_bypass *bypass)
+int	true_cond(t_bypass *bypass)
 {
-	return (bypass->cur->val > bypass->next(bypass)->val);
+	(void)bypass;
+	return (1);
 }
