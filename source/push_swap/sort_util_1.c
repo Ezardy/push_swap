@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:29:32 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/16 21:48:55 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/17 16:45:16 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	set_scheme(t_scheme *scm, size_t f, size_t t, int s);
 void	select_upper_scheme(t_dllist *a, t_dll_pivoted *b, t_scheme *scheme)
 {
 	scheme->is_upper = 1;
-	scheme->to_node = dllist_bigger(b->pivot, abs_diff(b->pivot->order,
-				b->upper->order) + 1, scheme->from_node->val, up_next);
+	scheme->to_node = dllist_bigger(b->pivot, dist(b, 1),
+			scheme->from_node->val, up_next);
 	if (!scheme->to_node)
 		scheme->to_node = b->upper;
 	else if (scheme->to_node != b->pivot)
