@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 18:11:39 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/15 23:01:28 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/17 21:24:08 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	clear_dllist(t_dllist *l)
 	t_dllist_node	*cur_node;
 	t_dllist_node	*next_node;
 
-	if (l->top)
+	if (l && l->top)
 	{
 		cur_node = l->top->next;
 		while (cur_node != l->top)

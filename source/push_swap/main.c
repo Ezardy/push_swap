@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/17 20:56:35 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/17 22:21:18 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ int	main(int argc, char **argv)
 	t_dllist	*b;
 	int			error;
 
-	error = 1;
 	a = read_numbers(argv + 1, argc - 1);
-	if (a)
+	error = a == NULL || (!a->size && argc > 1);
+	if (a && a->size && !dll_is_sorted(a))
 	{
 		b = create_dllist('b');
+		error = b == NULL;
 		if (b)
 		{
 			if (a->size > 2)
 				sort(a, b);
 			else if (a->top->val > a->top->prev->val)
 				s_(a);
-			error = 0;
 			clear_dllist(b);
 			free(b);
 		}
-		clear_dllist(a);
-		free(a);
 	}
+	clear_dllist(a);
+	free(a);
 	if (error)
-		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Error\n", 2);
 	return (error);
 }
 
