@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/17 16:44:38 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/17 20:56:35 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ static int	b2a(t_dllist *a, t_dll_pivoted *b)
 {
 	size_t	stock;
 
-	stock = 5;
+	if (b->l->size)
+		stock = a->size;
+	else
+		stock = 0;
 	rot_to_top(b->l, b->upper);
 	while (b->lower || b->upper || stock)
 	{
