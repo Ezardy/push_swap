@@ -36,7 +36,7 @@ push_swap: CFLAGS+=-DPRINT_STACK_ACTIONS=1
 push_swap: $(PUSH_SWAP_BUILD_PATH) libft/libft.a $(PUSH_SWAP_OBJ) $(COMMON_OBJ) $(PUSH_SWAP_HEADER) Makefile
 	cc $(CFLAGS) $(LFLAGS) -o $@ $(PUSH_SWAP_OBJ) $(COMMON_OBJ) -lft
 
-checker: $(CHECKER_BUILD_PATH) libft $(CHECKER_OBJ) $(COMMON_OBJ) $(CHECKER_HEADER) Makefile
+checker: $(CHECKER_BUILD_PATH) libft/libft.a $(CHECKER_OBJ) $(COMMON_OBJ) $(CHECKER_HEADER) Makefile
 	cc $(CFLAGS) $(LFLAGS) -o $@ $(CHECKER_OBJ) $(COMMON_OBJ) -lft
 
 $(BUILD_DIR):
@@ -63,5 +63,6 @@ clean:
 
 fclean: clean
 	rm -f push_swap
+	rm -f checker
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:15:22 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/17 22:21:18 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/18 12:45:16 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	int			error;
 
 	a = read_numbers(argv + 1, argc - 1);
-	error = a == NULL || (!a->size && argc > 1);
+	error = a == NULL;
 	if (a && a->size && !dll_is_sorted(a))
 	{
 		b = create_dllist('b');

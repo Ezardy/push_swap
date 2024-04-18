@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 19:55:16 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/18 00:31:30 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/18 12:43:43 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_atoi_safe(const char *str, int *num)
 	minor = 0;
 	if (!error)
 		offset = ft_atoi_count(str, num, 9);
-	error = error || ((offset < 9 && str[offset])
+	error = error || !offset || ((offset < 9 && str[offset])
 			|| (offset == 9 && !ft_isdigit(str[9]) && str[9]));
 	if (!error && offset == 9 && ft_isdigit(str[9]))
 	{

@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:21:20 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/18 01:02:22 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/18 13:21:21 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int argc, char **argv)
 	t_dllist	*a;
 	t_dllist	*b;
 
-	error = 1;
 	a = read_numbers(argv + 1, argc - 1);
-	if (a && (a->size || argc == 1))
+	error = a == NULL;
+	if (a && a->size)
 	{
 		b = create_dllist('b');
 		if (b)

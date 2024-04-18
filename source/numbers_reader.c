@@ -6,7 +6,7 @@
 /*   By: zanikin <zanikin@student.42yerevan.am>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 19:28:37 by zanikin           #+#    #+#             */
-/*   Updated: 2024/04/11 22:20:05 by zanikin          ###   ########.fr       */
+/*   Updated: 2024/04/18 12:53:13 by zanikin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_dllist	*read_numbers(char **params, int pcount)
 		while (!error && pcount--)
 		{
 			nums = ft_split(*params++, ' ');
-			error = nums == 0 || parse_strs(nums, dllist);
+			error = nums == NULL || *nums == NULL || parse_strs(nums, dllist);
 		}
 		if (error)
 		{
